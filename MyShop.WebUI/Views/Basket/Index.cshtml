@@ -9,6 +9,7 @@
 
 <table class="table">
     <tr>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.ProductName)
         </th>
@@ -22,34 +23,36 @@
         <th>
             Line Total
         </th>
-        <th></th>
+        <th>
+
+        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td><img  style="height:50px" class="img" src="~/Content/Productimages/@item.Image"/></td>
+        
+
+        <td><img style="height:50px" class="img" src="~/Content/Productimages/@item.Image" /></td>
         <td>
             @Html.DisplayFor(modelItem => item.ProductName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Quantity)
         </td>
-
         <td>
             @String.Format("{0:c}", item.Price)
         </td>
         <td>
-           @String.Format("{0:c}",item.Price * item.Quantity)
+            @String.Format("{0:c}", item.Price * item.Quantity)
         </td>
         <td>
-            <a href="@Html.ActionLink("RemovefromBasket", "Basket", new { id = item.Id })" class="btn btn-default">Delete</a>
-            
+            <a href="@Url.Action("RemovefromBasket","Basket", new { id = item.Id })" class="btn btn-danger">Delete</a>
         </td>
     </tr>
 }
     <tr>
         <td colspan="4" style="text-align:right"><strong>BasketTotal</strong></td>
-        <td>@String.Format("{0:c}",(from p in Model select p.Price * p.Quantity))</td>
+        <td>@String.Format("{0:c}",(from p in Model select p.Price * p.Quantity).Sum())</td>
     </tr>
 
 </table>
