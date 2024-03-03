@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 
 namespace MyShop.Services
 {
@@ -35,6 +36,23 @@ namespace MyShop.Services
                 orderRepository.Commit();
 
             }
+        }
+
+        public List<Order> GetOrdersList() {
+
+            return orderRepository.Collection().ToList();
+
+            
+        }
+        public Order GetOrder(string id)
+        {
+            return orderRepository.Find(id);
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            orderRepository.Update(order);
+            orderRepository.Commit();
         }
     }
 }
